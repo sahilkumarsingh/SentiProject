@@ -18,7 +18,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from sklearn import svm
 
-trainData = pd.read_csv("https://raw.githubusercontent.com/Vasistareddy/sentiment_analysis/master/data/train.csv")
+trainData = pd.read_csv("train.csv")
 
 vectorizer = TfidfVectorizer(min_df = 5,
                              max_df = 0.8,
