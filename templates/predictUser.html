@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+  <title>
+    Prediction
+  </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ </head>
+  
+  <body>
+  
+      <a href='/' class="btn btn-info" role="button">HOME</a>
+   
+    i am noob player. being sarcastic
+    <form action="" class="form-inline" method="post">
+      <input type="text" class="form-control" placeholder="@Username" name="username">
+      <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+    {{get_flashed_messages()}}
+    {{error}}
+  </body>
+</html>
+<!--value="{{request.form.username}}"-->
