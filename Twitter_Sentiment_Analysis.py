@@ -4,7 +4,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 
-from textblob import TextBlob
+#from textblob import TextBlob
  
 import twitter_credentials
 
@@ -132,10 +132,10 @@ if __name__ == '__main__':
 
     api = twitter_client.get_twitter_client_api()
     
-    tweets = api.user_timeline(screen_name = "guardiannews", count=200)
-    #tweets1 = twitter_client.get_tweets(query = 'Donald Trump', count = 200)
+    #tweets = api.user_timeline(screen_name = "guardiannews", count=200)
+    tweets1 = twitter_client.get_tweets(query = 'Dark Phoenix', count = 200)
 
-    df = tweet_analyzer.tweets_to_data_frame(tweets)
+    df = tweet_analyzer.tweets_to_data_frame(tweets1)
     df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
 
     print(df.head(14))
