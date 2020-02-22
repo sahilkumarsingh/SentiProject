@@ -47,12 +47,10 @@ class TwitterClient():
             for tweet in fetched_tweets: 
                 
                 # appending parsed tweet to tweets list 
-                if tweet.retweet_count > 0: 
+                if not hasattr(tweet,'retweeted_status'): 
                     # if tweet has retweets, ensure that it is appended only once 
-                    if tweet not in tweets1: 
-                        tweets1.append(tweet) 
-                else: 
                     tweets1.append(tweet) 
+                 
   
             # return parsed tweets 
             return tweets1
