@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+  <title>
+    Prediction
+  </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ </head>
+  
+  <body>
+  
+      <a href='/' class="btn btn-info" role="button">HOME</a>
+   
+    Prediction dekh lo :
+    
+    <table border = 1>
+     {% for df['tweets'], df['sentiment'] in df %}
+      <tr>
+        <td>{{df['tweets']}}</td><td>{{df['sentiment']}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+  </body>
+</html>
+<!--value="{{request.form.username}}"-->

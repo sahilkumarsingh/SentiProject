@@ -1,5 +1,7 @@
 from flask import Flask,flash,render_template,url_for,request,redirect
 
+import Twitter_Sentiment_Analysis
+
 app = Flask(__name__)
 
 app.secret_key = b'B\xdb\x1aF<\xb6\xcd\xce\x08\xe9Vw\xa4\xb9\xcd\xdb \xa6\x90G\xf4\xbf<\xf5'
@@ -7,6 +9,11 @@ app.secret_key = b'B\xdb\x1aF<\xb6\xcd\xce\x08\xe9Vw\xa4\xb9\xcd\xdb \xa6\x90G\x
 @app.route('/')
 def home():
 	return render_template('index.html')
+  
+  
+@app.route('/results')
+def res():
+	return render_template('result.html')
 
 @app.route('/predictTrend', methods=["GET","POST"])
 def predict():
@@ -15,8 +22,11 @@ def predict():
             if request.method == "POST":
                 name = request.form['keyword']
                 flash(name)
-                if name == "sahil":
-                    return redirect('/predictTrend')
+                tweets1 = twitter_client.get_tweets(query = name, count = 200)
+                df = tweet_analyzer.tweets_to_data_frame(tweets1)
+                df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
+                if name :
+                    return render_template('result.html', df=df.head(14))
                 else:
                     error = "invalid credentials"
             
@@ -33,9 +43,13 @@ def predict1():
         try:
             if request.method == "POST":
                 name = request.form['username']
+                api = twitter_client.get_twitter_client_api()
                 flash(name)
-                if name == "sahil":
-                    return redirect('/predictUser')
+                tweets = api.user_timeline(screen_name = name, count=200)
+                df = tweet_analyzer.tweets_to_data_frame(tweets)
+                df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
+                if name :
+                    return render_template('result.html', df=df.head(14))
                 else:
                     error = "invalid credentials"
             
@@ -48,4 +62,6 @@ def predict1():
 
 
 if __name__ == '__main__':
+    twitter_client = Twitter_Sentiment_Analysis.TwitterClient()
+    tweet_analyzer = Twitter_Sentiment_Analysis.TweetAnalyzer()
 	app.run(debug=True)
