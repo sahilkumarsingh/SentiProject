@@ -1,5 +1,5 @@
 from flask import Flask,flash,render_template,url_for,request,redirect
-
+import numpy as np
 import Twitter_Sentiment_Analysis
 
 app = Flask(__name__)
@@ -11,9 +11,9 @@ def home():
 	return render_template('index.html')
   
   
-@app.route('/results')
-def res():
-	return render_template('result.html')
+#@app.route('/results')
+#def res():
+#	return render_template('result.html')
 
 @app.route('/predictTrend', methods=["GET","POST"])
 def predict():
@@ -21,7 +21,7 @@ def predict():
         try:
             if request.method == "POST":
                 name = request.form['keyword']
-                flash(name)
+                #flash(name)
                 tweets1 = twitter_client.get_tweets(query = name, count = 200)
                 df = tweet_analyzer.tweets_to_data_frame(tweets1)
                 df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
@@ -44,7 +44,7 @@ def predict1():
             if request.method == "POST":
                 name = request.form['username']
                 api = twitter_client.get_twitter_client_api()
-                flash(name)
+                #flash(name)
                 tweets = api.user_timeline(screen_name = name, count=200)
                 df = tweet_analyzer.tweets_to_data_frame(tweets)
                 df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
@@ -64,4 +64,4 @@ def predict1():
 if __name__ == '__main__':
     twitter_client = Twitter_Sentiment_Analysis.TwitterClient()
     tweet_analyzer = Twitter_Sentiment_Analysis.TweetAnalyzer()
-	app.run(debug=True)
+    app.run(debug=True)

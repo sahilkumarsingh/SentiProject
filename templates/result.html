@@ -14,9 +14,9 @@
     Prediction dekh lo :
     
     <table border = 1>
-     {% for df['tweets'], df['sentiment'] in df %}
+     {% for index, row in df.iterrows() %}
       <tr>
-        <td>{{df['tweets']}}</td><td>{{df['sentiment']}}</td>
+        <td>{{ row["sentiment"]  }}</td><td>{{ row["tweets"]  }}</td>
       </tr>
       {% endfor %}
     </table>
