@@ -12,11 +12,12 @@ import pandas as pd
 import re
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+from sklearn.metrics import classification_report
 
 from sklearn import svm
 
 trainData = pd.read_csv("train.csv")
+testData = pd.read_csv("test.csv")
 
 vectorizer = TfidfVectorizer(min_df = 5,
                              max_df = 0.8,
@@ -24,8 +25,14 @@ vectorizer = TfidfVectorizer(min_df = 5,
                              use_idf = True)
 
 train_vectors = vectorizer.fit_transform(trainData['Content'])
+test_vectors = vectorizer.transform(testData['Content'])
+
+# # # # Using SVM # # # #
+
 classifier_linear = svm.SVC(kernel='linear')
 classifier_linear.fit(train_vectors, trainData['Label'])
+prediction_linear = classifier_linear.predict(test_vectors)
+report = classification_report(testData['Label'], prediction_linear, output_dict=True)
 
 # # # # TWITTER CLIENTS # # # #
 class TwitterClient():
@@ -135,3 +142,5 @@ if __name__ == '__main__':
     df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
 
     print(df.head(14))
+    print('positive: ', report['pos'])
+    print('negative: ', report['neg'])

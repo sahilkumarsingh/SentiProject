@@ -1,0 +1,58 @@
+
+#x {
+  text-align: center;
+}
+h3.pred {
+  text-align: center;
+  font-size: 30px;
+}
+
+.section-light {
+  background-color: #eceeef;
+  padding:2em;
+  background-image: url(../images/sent1.png);
+  background-size: cover;
+  
+}
+.darkSection {
+  background-color: #cccccc;
+  padding: 2em;
+}
+.coolstuffwrap {
+  display: block;
+  margin: auto;
+  margin-top: 20px;	
+}
+button.coolstuffbtn {
+  background-color: red;
+  color: #ffffff;
+}
+h5.modal-title {
+  margin: auto;
+}
+
+.col-sm-12 form {
+  padding: 2rem;
+}
+
+.imgcenter {
+  display: block;
+  margin: auto;
+}
+
+.btnCenter {
+  display: block;
+  margin: auto;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 80%;
+}
+
+.ftimg {
+  padding: 20px;
+}
+.jumbotron {
+  background: none;
+  text-align: center;
+  
+}

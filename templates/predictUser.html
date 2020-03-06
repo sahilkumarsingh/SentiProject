@@ -4,7 +4,13 @@
   <title>
     Prediction
   </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--CSS-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='../static/styles/main.css') }}">
  </head>
   
   <body>
@@ -12,10 +18,19 @@
       <a href='/' class="btn btn-info" role="button">HOME</a>
    
     <H1>Enter user id of any twitter account:</H1>
-    <form action="" class="form-inline" method="post">
+    <!--<form action="" class="form-inline" method="post">
       <input type="text" class="form-control" placeholder="@Username" name="username">
       <input class="btn btn-primary" type="submit" value="Submit">
-    </form>
+    </form>-->
+    <form class="form-inline" method="post">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="username">
+      <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+  </form>
     <!--{{get_flashed_messages()}}
     {{error}}-->
   </body>
