@@ -1,17 +1,57 @@
 <!DOCTYPE html>
  <html>
- <head>
-  <title>
-    Prediction
-  </title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
-  <link rel="stylesheet" href="{{ url_for('static',filename='../static/styles/main.css') }}">
- </head>
+   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="{{ url_for('static',filename='../static/styles/main.css') }}">
+    <title>#Trend</title>
+    <script>
+    window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+  </head>
   
   <body>
-  
-      <a href='/' class="btn btn-info" role="button">HOME</a>
+    <div class="container-fluid">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">TSA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href='/'>Home <span class="sr-only">(current)</span></a>
+            </li>
+                    
+          </ul>
+        </div>
+      </nav>
+      <div class="section-light">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <h1 class="display-4">Twitter Sentiment Analysis</h1>
+                <p class="lead">Let's analyse the digtal space.</p>
+              </div>
+            </div>
+          </div>    
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-sm-12 col-md-6">
+            <h3 class="display-4 pred"><a href='/predictUser' style="text-decoration: none;color: black;">USER</a><a href='/predictTrend' style="text-decoration: none;color: black;">/TREND</a></h3>    
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+      
+    </div>
    
     <H1>Search any trending movie or current affair:</H1>
     <form action="" class="form-inline" method="post">
