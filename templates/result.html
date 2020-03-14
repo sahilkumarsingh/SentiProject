@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
  <html>
  <head>
   <title>
@@ -24,5 +24,78 @@
     </table>
     
   </body>
-</html>
+</html>-->
 <!--value="{{request.form.username}}"-->
+<!DOCTYPE html>
+ <html>
+   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="{{ url_for('static',filename='../static/styles/main.css') }}">
+    <title>#Trend</title>
+    <script>
+    window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+  </head>
+  
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">TSA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href='/'>Home <span class="sr-only">(current)</span></a>
+            </li>
+                    
+          </ul>
+        </div>
+      </nav>
+      <div class="section-light">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="jumbotron jumbotron-fluid">
+              <div class="container">
+                <h1 class="display-4">Predictions</h1>
+                <p class="lead">Showing recent tweets :</p>
+              </div>
+            </div>
+          </div>    
+        </div>
+      </div>
+      <div class="darkSection">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-sm-12 col-md-6">
+            <h3 class="display-4 pred">
+              <table border = 1>
+              <tr>
+                <th>Tweet</th><th>SVM</th><th>KNN</th><th>LR</th><th>Tree</th>
+              </tr>
+              {% for index, row in df.iterrows() %}
+              <tr>
+              <td>{{ row["tweets"]  }}</td>
+              <td>{{ row["sent_svm"]  }}</td>
+              <td>{{ row["sent_knn"]  }}</td>
+              <td>{{ row["sent_lr"]  }}</td>
+              <td>{{ row["sent_treeC"]  }}</td>            
+              </tr>
+              {% endfor %}
+              </table>
+            </h3> 
+            {{error}}
+          </div>
+          <div class="col"></div>
+        </div>
+          </div>
+        </div>
+  </body>
+</html>

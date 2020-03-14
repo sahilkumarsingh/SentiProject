@@ -24,7 +24,10 @@ def predict():
                 #flash(name)
                 tweets1 = twitter_client.get_tweets(query = name, count = 200)
                 df = tweet_analyzer.tweets_to_data_frame(tweets1)
-                df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
+                df['sent_knn'] = np.array([tweet_analyzer.analyze_sentiment_knn(tweet) for tweet in df['tweets']])
+                df['sent_svm'] = np.array([tweet_analyzer.analyze_sentiment_svm(tweet) for tweet in df['tweets']])
+                df['sent_lr'] = np.array([tweet_analyzer.analyze_sentiment_logisticReg(tweet) for tweet in df['tweets']])
+                df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
                 if name :
                     return render_template('result.html', df=df.head(14))
                 else:
@@ -47,7 +50,10 @@ def predict1():
                 #flash(name)
                 tweets = api.user_timeline(screen_name = name, count=200)
                 df = tweet_analyzer.tweets_to_data_frame(tweets)
-                df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
+                df['sent_svm'] = np.array([tweet_analyzer.analyze_sentiment_svm(tweet) for tweet in df['tweets']])
+                df['sent_knn'] = np.array([tweet_analyzer.analyze_sentiment_knn(tweet) for tweet in df['tweets']])
+                df['sent_lr'] = np.array([tweet_analyzer.analyze_sentiment_logisticReg(tweet) for tweet in df['tweets']])
+                df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
                 if name :
                     return render_template('result.html', df=df.head(14))
                 else:

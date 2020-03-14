@@ -6,7 +6,7 @@ from tweepy import Stream
  
 import twitter_credentials
 
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 import numpy as np
 import pandas as pd
 import re
@@ -15,6 +15,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report
 
 from sklearn import svm
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+
 
 trainData = pd.read_csv("train.csv")
 testData = pd.read_csv("test.csv")
@@ -34,6 +38,32 @@ classifier_linear.fit(train_vectors, trainData['Label'])
 prediction_linear = classifier_linear.predict(test_vectors)
 report = classification_report(testData['Label'], prediction_linear, output_dict=True)
 
+# # # # # # # # # # # # # 
+
+# # # # Using KNN # # # #
+
+Y = trainData[['Label']]
+Y = Y['Label'].values
+k = 8  
+neigh = KNeighborsClassifier(n_neighbors = k).fit(train_vectors,Y)
+
+
+# # # # # # # # # # # # #
+
+# # # # Using logistic regression # # # #
+
+Y = np.asarray(trainData['Label'])
+Logistic = LogisticRegression(C=0.01, solver='liblinear').fit(train_vectors,Y)
+
+
+# # # # # # # # # # # # #
+# # # # Using Tree Classifier # # # #
+
+Y = trainData[['Label']]
+sentTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4)
+sentTree.fit(train_vectors,Y)
+
+# # # # # # # # # # # # #
 # # # # TWITTER CLIENTS # # # #
 class TwitterClient():
     def __init__(self, twitter_user=None):
@@ -102,28 +132,31 @@ class TweetAnalyzer():
     def clean_tweet(self, tweet):
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
-    def analyze_sentiment(self, tweet):
+    def analyze_sentiment_svm(self, tweet):
         review_vector = vectorizer.transform([tweet])
         return classifier_linear.predict(review_vector)
-        
-        #analysis = TextBlob(self.clean_tweet(tweet))
-        
-        #if analysis.sentiment.polarity > 0:
-         #   return 1
-        #elif analysis.sentiment.polarity == 0:
-         #   return 0
-        #else:
-         #   return -1
+    
+    def analyze_sentiment_knn(self, tweet):
+        review_vector = vectorizer.transform([tweet])
+        return neigh.predict(review_vector)
+    
+    def analyze_sentiment_logisticReg(self, tweet):
+        review_vector = vectorizer.transform([tweet])
+        return Logistic.predict(review_vector)
+      
+    def analyze_sentiment_TreeClassifier(self, tweet):
+        review_vector = vectorizer.transform([tweet])
+        return sentTree.predict(review_vector)
 
     def tweets_to_data_frame(self, tweets):
         df = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['tweets'])
 
-        df['id'] = np.array([tweet.id for tweet in tweets])
+        #df['id'] = np.array([tweet.id for tweet in tweets])
         df['len'] = np.array([len(tweet.text) for tweet in tweets])
-        df['date'] = np.array([tweet.created_at for tweet in tweets])
-        df['source'] = np.array([tweet.source for tweet in tweets])
-        df['likes'] = np.array([tweet.favorite_count for tweet in tweets])
-        df['retweets'] = np.array([tweet.retweet_count for tweet in tweets])
+        #df['date'] = np.array([tweet.created_at for tweet in tweets])
+        #df['source'] = np.array([tweet.source for tweet in tweets])
+        #df['likes'] = np.array([tweet.favorite_count for tweet in tweets])
+        #df['retweets'] = np.array([tweet.retweet_count for tweet in tweets])
 
         return df
 
@@ -139,7 +172,10 @@ if __name__ == '__main__':
     tweets1 = twitter_client.get_tweets(query = 'Dark Phoenix', count = 200)
 
     df = tweet_analyzer.tweets_to_data_frame(tweets1)
-    df['sentiment'] = np.array([tweet_analyzer.analyze_sentiment(tweet) for tweet in df['tweets']])
+    df['sent_svm'] = np.array([tweet_analyzer.analyze_sentiment_svm(tweet) for tweet in df['tweets']])
+    df['sent_knn'] = np.array([tweet_analyzer.analyze_sentiment_knn(tweet) for tweet in df['tweets']])
+    df['sent_lr'] = np.array([tweet_analyzer.analyze_sentiment_logisticReg(tweet) for tweet in df['tweets']])
+    df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
 
     print(df.head(14))
     print('positive: ', report['pos'])

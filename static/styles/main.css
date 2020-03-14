@@ -2,9 +2,18 @@
 #x {
   text-align: center;
 }
+h3 a.pred {
+  text-align: center;
+  font-size: 30px;
+}
 h3.pred {
   text-align: center;
   font-size: 30px;
+}
+
+h3.dis {
+  font-size: 2px;
+  text-align: center;
 }
 
 .section-light {
@@ -32,7 +41,7 @@ h5.modal-title {
 }
 
 .col-sm-12 form {
-  padding: 2rem;
+  padding: 2rem 2rem 0rem 8rem;
 }
 
 .imgcenter {

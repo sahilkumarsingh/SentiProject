@@ -45,20 +45,23 @@
         <div class="row">
           <div class="col"></div>
           <div class="col-sm-12 col-md-6">
-            <h3 class="display-4 pred"><a href='/predictUser' style="text-decoration: none;color: black;">USER</a><a href='/predictTrend' style="text-decoration: none;color: black;">/TREND</a></h3>    
+            <h3 class="display-4 pred">
+              <a style="text-decoration: none;color: black;">Search any trending movie or current affair:</a>
+              <a style="text-decoration: none;color: black;">
+                <form class="form-inline" method="post">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">#</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Keyword" aria-label="Username" aria-describedby="basic-addon1" name="keyword"><input class="btn btn-primary" type="submit" value="Submit">
+                  </div>
+                </form>
+              </a>
+            </h3>    
           </div>
           <div class="col"></div>
         </div>
       </div>
-      
     </div>
-   
-    <H1>Search any trending movie or current affair:</H1>
-    <form action="" class="form-inline" method="post">
-      <input type="text" class="form-control" placeholder="#keyword" name="keyword">
-      <input class="btn btn-primary" type="submit" value="Submit">
-    </form>
-    <!--{{get_flashed_messages()}}
-    {{error}}-->
   </body>
 </html>
