@@ -1,5 +1,6 @@
 from flask import Flask,flash,render_template,url_for,request,redirect
 import numpy as np
+import matplotlib.pyplot as plt
 import Twitter_Sentiment_Analysis
 
 app = Flask(__name__)
@@ -28,8 +29,64 @@ def predict():
                 df['sent_svm'] = np.array([tweet_analyzer.analyze_sentiment_svm(tweet) for tweet in df['tweets']])
                 df['sent_lr'] = np.array([tweet_analyzer.analyze_sentiment_logisticReg(tweet) for tweet in df['tweets']])
                 df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
+                
+                ####
+                polarity = ['POS', 'NEG']
+                explode = [0, 0]
+                
+                
+                # # # Creating pie chart for visual comparisons # # #
+                svm_pos = df['sent_svm'].value_counts('pos')
+                svm_p = svm_pos['pos']*100
+                result = [svm_p,100-svm_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("Support Vector Machine (SVM)")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/svmpie1.png', transparent= True)
+                plt.close()
+                
+                
+                
+                knn_pos = df['sent_knn'].value_counts('pos')
+                knn_p = knn_pos['pos']*100
+                result = [knn_p,100-knn_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("K Nearest Neighnor (KNN)")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/knnpie1.png', transparent= True)
+                plt.close()
+                
+                
+                                
+                lr_pos = df['sent_lr'].value_counts('pos')
+                lr_p = lr_pos['pos']*100
+                result = [lr_p,100-lr_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("Logistic Regression")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/lrpie1.png', transparent= True)
+                plt.close()
+                
+                
+                
+                treeC_pos = df['sent_treeC'].value_counts('pos')
+                treeC_p = treeC_pos['pos']*100
+                result = [treeC_p,100-treeC_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("Tree Classifier")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/tcpie1.png', transparent= True)
+                plt.close()
+                
+                
+                
+                
+                
+                ####
+                
+                
                 if name :
-                    return render_template('result.html', df=df.head(14))
+                    return render_template('result.html', df=df.head(3), Name = name)
                 else:
                     error = "invalid credentials"
             
@@ -54,8 +111,61 @@ def predict1():
                 df['sent_knn'] = np.array([tweet_analyzer.analyze_sentiment_knn(tweet) for tweet in df['tweets']])
                 df['sent_lr'] = np.array([tweet_analyzer.analyze_sentiment_logisticReg(tweet) for tweet in df['tweets']])
                 df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
+                ####
+                polarity = ['POS', 'NEG']
+                explode = [0, 0]
+                
+                
+                # # # Creating pie chart for visual comparisons # # #
+                svm_pos = df['sent_svm'].value_counts('pos')
+                svm_p = svm_pos['pos']*100
+                result = [svm_p,100-svm_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("Support Vector Machine (SVM)")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/svmpie1.png', transparent= True)
+                plt.close()
+                
+                
+                
+                knn_pos = df['sent_knn'].value_counts('pos')
+                knn_p = knn_pos['pos']*100
+                result = [knn_p,100-knn_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("K Nearest Neighnor (KNN)")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/knnpie1.png', transparent= True)
+                plt.close()
+                
+                
+                                
+                lr_pos = df['sent_lr'].value_counts('pos')
+                lr_p = lr_pos['pos']*100
+                result = [lr_p,100-lr_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("Logistic Regression")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/lrpie1.png', transparent= True)
+                plt.close()
+                
+                
+                
+                treeC_pos = df['sent_treeC'].value_counts('pos')
+                treeC_p = treeC_pos['pos']*100
+                result = [treeC_p,100-treeC_p]
+                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.title("Tree Classifier")
+                plt.axis('equal')
+                plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/tcpie1.png', transparent= True)
+                plt.close()
+                
+                
+                
+                
+                
+                ####
                 if name :
-                    return render_template('result.html', df=df.head(14))
+                    return render_template('result.html', df=df.head(3), Name = name)
                 else:
                     error = "invalid credentials"
             

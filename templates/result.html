@@ -40,6 +40,12 @@
     <title>#Trend</title>
     <script>
     window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+        }
+    }
     </script>
   </head>
   
@@ -64,8 +70,8 @@
           <div class="col-sm-12">
             <div class="jumbotron jumbotron-fluid">
               <div class="container">
-                <h1 class="display-4">Predictions</h1>
-                <p class="lead">Showing recent tweets :</p>
+                <h1 class="display-4">Predictions for {{Name}}</h1>
+                <p class="lead">Comparison Between 4 ML algorithms, showing there respective results:</p>
               </div>
             </div>
           </div>    
@@ -76,17 +82,14 @@
           <div class="col"></div>
           <div class="col-sm-12 col-md-6">
             <h3 class="display-4 pred">
+             Some feteched tweets:
               <table border = 1>
               <tr>
-                <th>Tweet</th><th>SVM</th><th>KNN</th><th>LR</th><th>Tree</th>
+                <th>Tweet</th>
               </tr>
               {% for index, row in df.iterrows() %}
               <tr>
-              <td>{{ row["tweets"]  }}</td>
-              <td>{{ row["sent_svm"]  }}</td>
-              <td>{{ row["sent_knn"]  }}</td>
-              <td>{{ row["sent_lr"]  }}</td>
-              <td>{{ row["sent_treeC"]  }}</td>            
+              <td>{{ row["tweets"]  }}</td>           
               </tr>
               {% endfor %}
               </table>
@@ -95,6 +98,33 @@
           </div>
           <div class="col"></div>
         </div>
+         <div class="row">
+          
+          <div class="col-sm-12 col-lg-6">
+             <img class="img-fluid" src="../static/images/svmpie1.png" alt="svm result">
+          </div>
+          <div class="col-sm-12 col-lg-6">
+             <img class="img-fluid" src="../static/images/knnpie1.png" alt="knn result">
+          </div>
+          </div>
+          <div class="row">         
+           <div class="col-sm-12 col-lg-6">
+             <img class="img-fluid" src="../static/images/lrpie1.png" alt="lr result">
+           </div>
+           <div class="col-sm-12 col-lg-6">
+             <img class="img-fluid" src="../static/images/tcpie1.png" alt="tc result">
+           </div>
+         </div>
+         <div class="row">
+           <div class="col"></div>
+           <div class="col-lg-7">
+             <div class="row">
+               <div class="col">
+                 <img class="img-fluid" src="../static/images/roc11.png" alt="ROC Curve image">
+               </div>
+             </div>
+           </div>
+          </div>
           </div>
         </div>
   </body>
