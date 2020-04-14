@@ -71,7 +71,7 @@
             <div class="jumbotron jumbotron-fluid">
               <div class="container">
                 <h1 class="display-4">Predictions for {{Name}}</h1>
-                <p class="lead">Comparison Between 4 ML algorithms, showing there respective results:</p>
+                <h5 class="lead">Comparison Between 4 ML algorithms, showing there respective results:</h5>
               </div>
             </div>
           </div>    
@@ -99,6 +99,13 @@
           <div class="col"></div>
         </div>
          <div class="row">
+           <div class="col-lg-12">
+             <h3 class="display-4 pred">
+               Positive % and Negative % for each model
+             </h3>
+           </div>
+         </div>
+         <div class="row">
           
           <div class="col-sm-12 col-lg-6">
              <img class="img-fluid" src="../static/images/svmpie1.png" alt="svm result">
@@ -116,7 +123,18 @@
            </div>
          </div>
          <div class="row">
-           <div class="col"></div>
+           <div class="col">
+             <h3 class="display-4 pred">The ROC curve:</h3>
+             <p>
+               A receiver operating characteristic curve is a graph showing the performance of a classification model at all classification thresholds. This curve plots two parameters:
+               
+             </p>
+             <ul>
+               <li>True Positive Rate</li>
+               <li>False Positive Rate</li>
+             </ul>
+             
+           </div>
            <div class="col-lg-7">
              <div class="row">
                <div class="col">

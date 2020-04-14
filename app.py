@@ -33,13 +33,13 @@ def predict():
                 ####
                 polarity = ['POS', 'NEG']
                 explode = [0, 0]
-                
+                colors = ['#7a82ff', '#ff5d5d']
                 
                 # # # Creating pie chart for visual comparisons # # #
                 svm_pos = df['sent_svm'].value_counts('pos')
                 svm_p = svm_pos['pos']*100
                 result = [svm_p,100-svm_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("Support Vector Machine (SVM)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/svmpie1.png', transparent= True)
@@ -50,7 +50,7 @@ def predict():
                 knn_pos = df['sent_knn'].value_counts('pos')
                 knn_p = knn_pos['pos']*100
                 result = [knn_p,100-knn_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("K Nearest Neighnor (KNN)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/knnpie1.png', transparent= True)
@@ -61,7 +61,7 @@ def predict():
                 lr_pos = df['sent_lr'].value_counts('pos')
                 lr_p = lr_pos['pos']*100
                 result = [lr_p,100-lr_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("Logistic Regression")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/lrpie1.png', transparent= True)
@@ -72,7 +72,7 @@ def predict():
                 treeC_pos = df['sent_treeC'].value_counts('pos')
                 treeC_p = treeC_pos['pos']*100
                 result = [treeC_p,100-treeC_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("Tree Classifier")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/tcpie1.png', transparent= True)
@@ -114,13 +114,14 @@ def predict1():
                 ####
                 polarity = ['POS', 'NEG']
                 explode = [0, 0]
+                colors = ['#7a82ff', '#ff5d5d']
                 
                 
                 # # # Creating pie chart for visual comparisons # # #
                 svm_pos = df['sent_svm'].value_counts('pos')
                 svm_p = svm_pos['pos']*100
                 result = [svm_p,100-svm_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors,labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("Support Vector Machine (SVM)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/svmpie1.png', transparent= True)
@@ -131,7 +132,7 @@ def predict1():
                 knn_pos = df['sent_knn'].value_counts('pos')
                 knn_p = knn_pos['pos']*100
                 result = [knn_p,100-knn_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("K Nearest Neighnor (KNN)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/knnpie1.png', transparent= True)
@@ -142,7 +143,7 @@ def predict1():
                 lr_pos = df['sent_lr'].value_counts('pos')
                 lr_p = lr_pos['pos']*100
                 result = [lr_p,100-lr_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("Logistic Regression")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/lrpie1.png', transparent= True)
@@ -153,7 +154,7 @@ def predict1():
                 treeC_pos = df['sent_treeC'].value_counts('pos')
                 treeC_p = treeC_pos['pos']*100
                 result = [treeC_p,100-treeC_p]
-                plt.pie(result, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
                 plt.title("Tree Classifier")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/tcpie1.png', transparent= True)
