@@ -69,3 +69,15 @@ img {
   max-width: 100%;
   height :auto;
 }
+.panel {
+  background-color: #262c37;
+  margin-top: 1rem;
+  color: #eceeef;
+}
+.panel1 {
+  margin-bottom: 1rem;
+}
+h5.display-4.mm {
+  font-size: 40px;
+}
+

@@ -3,6 +3,8 @@ from tweepy import Cursor
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+import joblib
+
  
 import twitter_credentials
 
@@ -12,7 +14,7 @@ import pandas as pd
 import re
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import classification_report
+#from sklearn.metrics import classification_report
 
 from sklearn import svm
 from sklearn.neighbors import KNeighborsClassifier
@@ -33,35 +35,42 @@ test_vectors = vectorizer.transform(testData['Content'])
 
 # # # # Using SVM # # # #
 
-classifier_linear = svm.SVC(kernel='linear')
-classifier_linear.fit(train_vectors, trainData['Label'])
-prediction_linear = classifier_linear.predict(test_vectors)
-report = classification_report(testData['Label'], prediction_linear, output_dict=True)
+#classifier_linear = svm.SVC(kernel='linear')
+#classifier_linear.fit(train_vectors, trainData['Label'])
+#prediction_linear = classifier_linear.predict(test_vectors)
+#report = classification_report(testData['Label'], prediction_linear, output_dict=True)
+
+classifier_linear = joblib.load("svm.pkl")
 
 # # # # # # # # # # # # # 
 
 # # # # Using KNN # # # #
 
-Y = trainData[['Label']]
-Y = Y['Label'].values
-k = 8  
-neigh = KNeighborsClassifier(n_neighbors = k).fit(train_vectors,Y)
+#Y = trainData[['Label']]
+#Y = Y['Label'].values
+#k = 8  
+#neigh = KNeighborsClassifier(n_neighbors = k).fit(train_vectors,Y)
+neigh = joblib.load("knn.pkl")
+
 
 
 # # # # # # # # # # # # #
 
 # # # # Using logistic regression # # # #
 
-Y = np.asarray(trainData['Label'])
-Logistic = LogisticRegression(C=0.01, solver='liblinear').fit(train_vectors,Y)
+#Y = np.asarray(trainData['Label'])
+#Logistic = LogisticRegression(C=0.01, solver='liblinear').fit(train_vectors,Y)
+Logistic = joblib.load("lr.pkl")
 
 
 # # # # # # # # # # # # #
 # # # # Using Tree Classifier # # # #
 
-Y = trainData[['Label']]
-sentTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4)
-sentTree.fit(train_vectors,Y)
+#Y = trainData[['Label']]
+#sentTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4)
+#sentTree.fit(train_vectors,Y)
+sentTree = joblib.load("tc.pkl")
+
 
 # # # # # # # # # # # # #
 # # # # TWITTER CLIENTS # # # #

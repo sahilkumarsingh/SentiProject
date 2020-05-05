@@ -1,7 +1,8 @@
 from flask import Flask,flash,render_template,url_for,request,redirect
-import numpy as np
-import matplotlib.pyplot as plt
 import Twitter_Sentiment_Analysis
+import matplotlib.pyplot as plt 
+import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def predict():
                 df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
                 
                 ####
-                polarity = ['POS', 'NEG']
+                polarity = ['Positive', 'Negative']
                 explode = [0, 0]
                 colors = ['#7a82ff', '#ff5d5d']
                 
@@ -39,7 +40,7 @@ def predict():
                 svm_pos = df['sent_svm'].value_counts('pos')
                 svm_p = svm_pos['pos']*100
                 result = [svm_p,100-svm_p]
-                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0}, startangle=90)
                 plt.title("Support Vector Machine (SVM)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/svmpie1.png', transparent= True)
@@ -50,7 +51,7 @@ def predict():
                 knn_pos = df['sent_knn'].value_counts('pos')
                 knn_p = knn_pos['pos']*100
                 result = [knn_p,100-knn_p]
-                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0}, startangle=90)
                 plt.title("K Nearest Neighnor (KNN)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/knnpie1.png', transparent= True)
@@ -112,7 +113,7 @@ def predict1():
                 df['sent_lr'] = np.array([tweet_analyzer.analyze_sentiment_logisticReg(tweet) for tweet in df['tweets']])
                 df['sent_treeC'] = np.array([tweet_analyzer.analyze_sentiment_TreeClassifier(tweet) for tweet in df['tweets']])
                 ####
-                polarity = ['POS', 'NEG']
+                polarity = ['Positive', 'Negative']
                 explode = [0, 0]
                 colors = ['#7a82ff', '#ff5d5d']
                 
@@ -121,7 +122,7 @@ def predict1():
                 svm_pos = df['sent_svm'].value_counts('pos')
                 svm_p = svm_pos['pos']*100
                 result = [svm_p,100-svm_p]
-                plt.pie(result, colors = colors,labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors,labels = polarity ,autopct='%1.2f%%', radius = 0.50, shadow = True,wedgeprops = {'edgecolor': 'black', 'linewidth': 0}, startangle=90)
                 plt.title("Support Vector Machine (SVM)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/svmpie1.png', transparent= True)
@@ -132,7 +133,7 @@ def predict1():
                 knn_pos = df['sent_knn'].value_counts('pos')
                 knn_p = knn_pos['pos']*100
                 result = [knn_p,100-knn_p]
-                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0})
+                plt.pie(result, colors = colors, labels = polarity ,autopct='%1.2f%%', shadow = True, radius = 0.50, wedgeprops = {'edgecolor': 'black', 'linewidth': 0}, startangle=90)
                 plt.title("K Nearest Neighnor (KNN)")
                 plt.axis('equal')
                 plt.savefig('/Users/sahil/Desktop/sentiproject/static/images/knnpie1.png', transparent= True)
