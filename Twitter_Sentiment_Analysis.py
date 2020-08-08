@@ -37,9 +37,7 @@ test_vectors = vectorizer.transform(testData['Content'])
 
 #classifier_linear = svm.SVC(kernel='linear')
 #classifier_linear.fit(train_vectors, trainData['Label'])
-#prediction_linear = classifier_linear.predict(test_vectors)
-#report = classification_report(testData['Label'], prediction_linear, output_dict=True)
-
+#joblib.dump(classifier_linear, 'svm.pkl')#this saves the trained model in a file.
 classifier_linear = joblib.load("svm.pkl")
 
 # # # # # # # # # # # # # 
@@ -50,6 +48,7 @@ classifier_linear = joblib.load("svm.pkl")
 #Y = Y['Label'].values
 #k = 8  
 #neigh = KNeighborsClassifier(n_neighbors = k).fit(train_vectors,Y)
+#joblib.dump(neigh, 'knn.pkl')#this saves the trained model in a file.
 neigh = joblib.load("knn.pkl")
 
 
@@ -60,6 +59,7 @@ neigh = joblib.load("knn.pkl")
 
 #Y = np.asarray(trainData['Label'])
 #Logistic = LogisticRegression(C=0.01, solver='liblinear').fit(train_vectors,Y)
+#joblib.dump(Logistic, 'lr.pkl')#this saves the trained model in a file.
 Logistic = joblib.load("lr.pkl")
 
 
@@ -69,6 +69,7 @@ Logistic = joblib.load("lr.pkl")
 #Y = trainData[['Label']]
 #sentTree = DecisionTreeClassifier(criterion="entropy", max_depth = 4)
 #sentTree.fit(train_vectors,Y)
+#joblib.dump(sentTree, 'tc.pkl')#this saves the trained model in a file.
 sentTree = joblib.load("tc.pkl")
 
 
